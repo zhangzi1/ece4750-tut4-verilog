@@ -21,7 +21,7 @@ module tut4_verilog_regincr_RegIncr
   logic [7:0] reg_out;
   always @( posedge clk )
     if ( reset )
-      reg_out <= '0;
+      reg_out <= 0;
     else
       reg_out <= in;
 
