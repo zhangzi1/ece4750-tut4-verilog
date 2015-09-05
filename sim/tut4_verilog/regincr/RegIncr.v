@@ -19,11 +19,12 @@ module tut4_verilog_regincr_RegIncr
   // Sequential logic
 
   logic [7:0] reg_out;
-  always @( posedge clk )
+  always @( posedge clk ) begin
     if ( reset )
       reg_out <= 0;
     else
       reg_out <= in;
+  end
 
   // ''' TUTORIAL TASK '''''''''''''''''''''''''''''''''''''''''''''''''''
   // This model is incomplete. As part of the tutorial you will add a
