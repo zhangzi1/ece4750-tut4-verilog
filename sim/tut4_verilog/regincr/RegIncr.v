@@ -8,8 +8,6 @@
 `ifndef TUT4_VERILOG_REGINCR_REG_INCR_V
 `define TUT4_VERILOG_REGINCR_REG_INCR_V
 
-`include "vc/trace.v"
-
 module tut4_verilog_regincr_RegIncr
 (
   input  logic       clk,
@@ -21,7 +19,7 @@ module tut4_verilog_regincr_RegIncr
   // Sequential logic
 
   logic [7:0] reg_out;
-  always_ff @( posedge clk )
+  always @( posedge clk )
     if ( reset )
       reg_out <= '0;
     else
