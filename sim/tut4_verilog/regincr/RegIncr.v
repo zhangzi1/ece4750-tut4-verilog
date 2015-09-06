@@ -29,7 +29,7 @@ module tut4_verilog_regincr_RegIncr
   // ''' TUTORIAL TASK '''''''''''''''''''''''''''''''''''''''''''''''''''
   // This model is incomplete. As part of the tutorial you will insert
   // combinational logic here to model the incrementer logic.
-  // '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+  // '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''\/
 
 endmodule
 

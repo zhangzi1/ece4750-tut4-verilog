@@ -20,7 +20,7 @@ module top;
   // ''' TUTORIAL TASK '''''''''''''''''''''''''''''''''''''''''''''''''''
   // This simulator script is incomplete. As part of the tutorial you
   // will need to instantiate and connect a RegIncr model here.
-  // '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+  // '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''\/
 
   // Verify functionality
 
