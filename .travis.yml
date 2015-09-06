@@ -4,8 +4,6 @@
 # This file configures Travis CI to automatically run the test for this
 # PyMTL project everytime we do a commit to GitHub.
 
-# force rebuild
-
 #------------------------------------------------------------------------
 # VM setup
 #------------------------------------------------------------------------
@@ -23,8 +21,8 @@ install:
 
  # Install verilator
 
- - wget --quiet http://brg.csl.cornell.edu/artifacts/verilator-travis-3.876.tar.gz
- - tar xfz verilator-travis-3.876.tar.gz
+ - git clone https://github.com/cornell-brg/verilator-travisci-cache.git
+ - tar xfz verilator-travisci-cache/verilator-travis-3.876.tar.gz
  - export VERILATOR_ROOT=${PWD}/verilator-3.876
  - export PATH=${VERILATOR_ROOT}/bin:$PATH
  - export PYMTL_VERILATOR_INCLUDE_DIR=${VERILATOR_ROOT}/include
