@@ -284,6 +284,8 @@ module vc_QueueCtrl
   logic [c_addr_nbits-1:0] deq_ptr_plus1;
   assign deq_ptr_plus1 = deq_ptr + 1'b1;
 
+  /* verilator lint_off WIDTH */
+
   logic [c_addr_nbits-1:0] deq_ptr_inc;
   assign deq_ptr_inc = (deq_ptr_plus1 == p_num_msgs) ? {c_addr_nbits{1'b0}} : deq_ptr_plus1;
 
@@ -292,6 +294,8 @@ module vc_QueueCtrl
 
   logic [c_addr_nbits-1:0] enq_ptr_inc;
   assign enq_ptr_inc = (enq_ptr_plus1 == p_num_msgs) ? {c_addr_nbits{1'b0}} : enq_ptr_plus1;
+
+  /* lint_on */
 
   assign deq_ptr_next
     = ( do_deq && ~do_bypass ) ? ( deq_ptr_inc ) : deq_ptr;
@@ -486,24 +490,24 @@ module vc_Queue
 
   // Line Tracing
 
-  logic [`VC_TRACE_NBITS_TO_NCHARS(p_msg_nbits)*8-1:0] str;
+  //  logic [`VC_TRACE_NBITS_TO_NCHARS(p_msg_nbits)*8-1:0] str;
+  //
+  //  `VC_TRACE_BEGIN
+  //  begin
+  //
+  //    $sformat( str, "%x", enq_msg );
+  //    vc_trace.append_val_rdy_str( trace_str, enq_val, enq_rdy, str );
+  //
+  //    vc_trace.append_str( trace_str, "(" );
+  //    $sformat( str, "%x", p_num_msgs-num_free_entries );
+  //    vc_trace.append_str( trace_str, str );
+  //    vc_trace.append_str( trace_str, ")" );
+  //
+  //    $sformat( str, "%x", deq_msg );
+  //    vc_trace.append_val_rdy_str( trace_str, deq_val, deq_rdy, str );
 
-  `VC_TRACE_BEGIN
-  begin
-
-    $sformat( str, "%x", enq_msg );
-    vc_trace.append_val_rdy_str( trace_str, enq_val, enq_rdy, str );
-
-    vc_trace.append_str( trace_str, "(" );
-    $sformat( str, "%x", p_num_msgs-num_free_entries );
-    vc_trace.append_str( trace_str, str );
-    vc_trace.append_str( trace_str, ")" );
-
-    $sformat( str, "%x", deq_msg );
-    vc_trace.append_val_rdy_str( trace_str, deq_val, deq_rdy, str );
-
-  end
-  endtask
+  // end
+  // endtask
 
 endmodule
 

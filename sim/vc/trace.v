@@ -44,13 +44,19 @@ module vc_Trace
 
   // Get trace level from command line
 
-  logic [3:0] level = 1;
+  logic [3:0] level;
 
-  // initial begin
-  //   if ( !$value$plusargs( "trace=%d", level ) ) begin
-  //     level = 0;
-  //   end
-  // end
+`ifndef VERILATOR
+  initial begin
+    if ( !$value$plusargs( "trace=%d", level ) ) begin
+      level = 0;
+    end
+  end
+`else
+  initial begin
+    level = 1;
+  end
+`endif // !`ifndef VERILATOR
 
   // Track cycle count
 
@@ -226,10 +232,48 @@ endmodule
 // VC_TRACE_BEGIN
 //------------------------------------------------------------------------
 
+//`define VC_TRACE_BEGIN                                                  \
+//  export "DPI-C" task line_trace;                                       \
+//  vc_Trace vc_trace(clk,reset);                                         \
+//  task line_trace( inout bit [(512*8)-1:0] trace_str );
+
+`ifndef VERILATOR
+`define VC_TRACE_BEGIN                                                  \
+  vc_Trace vc_trace(clk,reset);                                         \
+                                                                        \
+  task display_trace;                                                   \
+  begin                                                                 \
+                                                                        \
+    if ( vc_trace.level > 0 ) begin                                     \
+      vc_trace.storage[15:0] = vc_trace.nchars-1;                       \
+                                                                        \
+      line_trace( vc_trace.storage );                                   \
+                                                                        \
+      $write( "%4d: ", vc_trace.cycles );                               \
+                                                                        \
+      vc_trace.idx0 = vc_trace.storage[15:0];                           \
+      for ( vc_trace.idx1 = vc_trace.nchars-1;                          \
+            vc_trace.idx1 > vc_trace.idx0;                              \
+            vc_trace.idx1 = vc_trace.idx1 - 1 )                         \
+      begin                                                             \
+        $write( "%s", vc_trace.storage[vc_trace.idx1*8+:8] );           \
+      end                                                               \
+      $write("\n");                                                     \
+                                                                        \
+    end                                                                 \
+                                                                        \
+    vc_trace.cycles_next = vc_trace.cycles + 1;                         \
+                                                                        \
+  end                                                                   \
+  endtask                                                               \
+                                                                        \
+  task line_trace( inout bit [(512*8)-1:0] trace_str );
+`else
 `define VC_TRACE_BEGIN                                                  \
   export "DPI-C" task line_trace;                                       \
   vc_Trace vc_trace(clk,reset);                                         \
   task line_trace( inout bit [(512*8)-1:0] trace_str );
+`endif
 
 //------------------------------------------------------------------------
 // VC_TRACE_END

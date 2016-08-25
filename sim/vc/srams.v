@@ -43,12 +43,16 @@ module vc_CombinationalSRAM_1rw
   // read data is all X's if the read is not enable at all to avoid
   // (potentially) incorrectly assuming the SRAM latches the read data.
 
+  /* verilator lint_off WIDTH */
+
   always @(*) begin
     if ( read_en )
       read_data = mem[read_addr];
     else
       read_data = 'hx;
   end
+
+  /* lint_on */
 
   // Inspired by http://www.xilinx.com/support/documentation/sw_manuals/xilinx11/xst.pdf, page 159
 

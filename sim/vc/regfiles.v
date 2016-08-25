@@ -116,6 +116,7 @@ module vc_ResetRegfile_1r1w
 
   // Assertions
 
+  /*
   always @( posedge clk ) begin
     if ( !reset ) begin
       `VC_ASSERT_NOT_X( write_en );
@@ -130,6 +131,7 @@ module vc_ResetRegfile_1r1w
 
     end
   end
+  */
 
 endmodule
 
@@ -180,6 +182,7 @@ module vc_Regfile_2r1w
 
   // Assertions
 
+  /*
   always @( posedge clk ) begin
     if ( !reset ) begin
       `VC_ASSERT_NOT_X( write_en );
@@ -194,6 +197,7 @@ module vc_Regfile_2r1w
 
     end
   end
+  */
 
 endmodule
 
@@ -284,7 +288,7 @@ module vc_Regfile_2r2w
     end
   end
   */
-  
+
 endmodule
 
 `endif /* VC_REGFILES_V */
