@@ -26,12 +26,15 @@ module tut4_verilog_regincr_RegIncr
       reg_out <= in;
   end
 
-  // ''' TUTORIAL TASK '''''''''''''''''''''''''''''''''''''''''''''''''''
-  // This model is incomplete. As part of the tutorial you will insert
-  // combinational logic here to model the incrementer logic.
-  // '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+  // Combinational logic
+
+  logic[7:0] inc_out;
+  always @(*) begin
+    inc_out = reg_out + 1;
+  end
+
+  assign out = inc_out;
 
 endmodule
 
 `endif /* TUT4_VERILOG_REGINCR_REG_INCR_V */
-

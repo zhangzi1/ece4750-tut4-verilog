@@ -30,13 +30,16 @@ module tut4_verilog_regincr_RegIncr2stage
     .out   (reg_incr_0_out)
   );
 
-  // ''' TUTORIAL TASK '''''''''''''''''''''''''''''''''''''''''''''''''''
-  // This model is incomplete. As part of the tutorial you will need to
-  // instantiate and connect the second stage of this two-stage
-  // registered incrementer here.
-  // '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+  //Second stage
+
+  tut4_verilog_regincr_RegIncr reg_incr_1
+  (
+    .clk   (clk),
+    .reset (reset),
+    .in    (reg_incr_0_out),
+    .out   (out)
+  );
 
 endmodule
 
 `endif /* TUT4_VERILOG_REGINCR_REG_INCR_2STAGE_V */
-
